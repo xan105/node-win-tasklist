@@ -100,8 +100,7 @@ Returns an [Array] of object or null<br />
     
      Array of string. Each string being a filter.<br />
      
-     eg: 
-     filter for listing only running processes
+     eg filter for listing only running processes :
      ```
      ["STATUS eq RUNNING"]
      ```
@@ -182,7 +181,7 @@ Helper function:
 
   Promise.<br />
 
-  process can either be a PID or an imagename.<br />
+  `process` can either be a PID or an imagename.<br />
   Same option as main function minus filter.<br />
 
   Returns an [Array] of object or null<br />
@@ -191,7 +190,7 @@ Helper function:
 
   Promise.<br />
   
-  process can either be a PID or an imagename.<br />
+  `process` can either be a PID or an imagename.<br />
   Same options as main function minus filter and verbose.<br />
   
   Return true if the specified process is running (*meaning it has the status RUNNING*),<br />
@@ -203,7 +202,7 @@ Helper function:
 
   Promise.<br />
   
-  process can either be a PID or an imagename.<br />
+  `process` can either be a PID or an imagename.<br />
   Same options as main function minus filter and verbose.<br />
   
   Return true if the specified process is loaded (*meaning it is listed in the tasklist*),<br />
