@@ -73,37 +73,32 @@ API
 
 It's always good to have a look at the official [tasklist](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist) doc.
 
-***tasklist***([option])
+**tasklist**([option])
 
-Promise.
-Returns an [Array] of object or null
+Promise.<br />
+Returns an [Array] of object or null<br />
 
-***options***
+**options**
     
-    - verbose (default: false)
-    
-      if false will return the following properties : process, pid, sessionType, sessionNumber, memUsage (bytes).
-      if true will additionally return the following properties : state, user, cpuTime, windowTitle.
-    
+- verbose (default: false)<br />
+      if false will return the following properties : process, pid, sessionType, sessionNumber, memUsage (bytes).<br />
+      if true will additionally return the following properties : state, user, cpuTime, windowTitle.<br />
+      <br />
       Keep in mind using the verbose option might impact performance.
     
-    - remote (default: null)
-      
-      Name or IP address of a remote computer.
-      
+- remote (default: null)<br />
+      Name or IP address of a remote computer.<br />
       Must be used with user and password options below.
     
-    - user (default: null)
-      
+- user (default: null)<br />
       Username or Domain\Username.
     
-    - password (default: null)
-    
+- password (default: null)<br />
       User's password.
       
-    - filter (default: [])
+- filter (default: [])<br />
     
-     Array of string. Each string being a filter.
+     Array of string. Each string being a filter.<br />
      
      eg: 
      filter for listing only running processes
@@ -180,39 +175,38 @@ Returns an [Array] of object or null
         </tbody>
     </table>
 
-<hr>
-
 Helper function:
+================
 
-***getProcessInfo***(process,[option])
+- **getProcessInfo**(process,[option])
 
-  Promise.
+  Promise.<br />
 
-  process can either be a PID or an imagename.
-  Same option as main function minus filter.
+  process can either be a PID or an imagename.<br />
+  Same option as main function minus filter.<br />
 
-  Returns an [Array] of object or null
+  Returns an [Array] of object or null<br />
 
-***isProcessRunning***(process,[option])
+- **isProcessRunning**(process,[option])
 
-  Promise.
+  Promise.<br />
   
-  process can either be a PID or an imagename.
-  Same options as main function minus filter and verbose.
+  process can either be a PID or an imagename.<br />
+  Same options as main function minus filter and verbose.<br />
   
-  Return true if the specified process is running (meaning it has the status RUNNING),
-  false otherwise.
+  Return true if the specified process is running (*meaning it has the status RUNNING*),<br />
+  false otherwise.<br />
    
-  Equivalent of filter IMAGENAME/PID eq %process% and STATUS eq RUNNING.
+  Equivalent of filter *IMAGENAME/PID eq %process% and STATUS eq RUNNING*.<br />
    
-***hasProcess***(process,[option])
+- **hasProcess**(process,[option])
 
-  Promise.
+  Promise.<br />
   
-  process can either be a PID or an imagename.
-  Same options as main function minus filter and verbose.
+  process can either be a PID or an imagename.<br />
+  Same options as main function minus filter and verbose.<br />
   
-  Return true if the specified process is loaded (meaning it is listed in the tasklist),
-  false otherwise.
+  Return true if the specified process is loaded (*meaning it is listed in the tasklist*),<br />
+  false otherwise.<br />
   
-  Equivalent of filter IMAGENAME/PID eq %process%.
+  Equivalent of filter *IMAGENAME/PID eq %process%*.<br />
