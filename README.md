@@ -3,7 +3,7 @@ Dependency-free promise based wrapper for the Windows tasklist command.
 Note about locale:
 ------------------
 
-Most Windows commands change their output based on system's locale, which can be sometimes difficult when you are trying to parse the output on a non-English system.
+Most Windows commands change their output based on system's locale, which can be sometimes difficult when you are trying to parse the output of a non-English system.
 This module tries to be system-locale-independent as much as possible in order to be able to parse the tasklist output.
 Unfortunately user and windowTitle returned properties will remain locale-dependent (Not sure about sessionType ?).
 
