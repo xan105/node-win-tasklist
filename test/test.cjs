@@ -1,4 +1,6 @@
-const tasklist = require('./tasklist.js');
+"use strict";
+
+const tasklist = require('../tasklist.cjs');
 
 tasklist().then((list)=>{
 
