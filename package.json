@@ -1,12 +1,12 @@
 {
   "name": "win-tasklist",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Dependency-free promise based wrapper for the Windows tasklist command. Non-English locale friendly as much as possible.",
   "type": "module",
-  "main": "tasklist.cjs",
+  "main": "./lib/tasklist.cjs",
   "exports": {
-    "import": "./esm.mjs",
-    "require": "./tasklist.cjs"
+    "import": "./lib/esm.mjs",
+    "require": "./lib/tasklist.cjs"
   },
   "os": [
     "win32"
