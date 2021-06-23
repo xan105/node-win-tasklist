@@ -95,6 +95,10 @@ Returns an [Array] of object or null<br />
     
 - password (default: null)<br />
       User's password.
+ 
+- uwpOnly (default: false)<br />
+      List only Windows Store Apps (UWP).
+      NB: With this option to true and verbose to false; tasklist only returns process, pid, memUsage (bytes) and AUMID.
       
 - filter (default: [])<br />
     
