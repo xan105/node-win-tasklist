@@ -42,6 +42,16 @@ tasklist.isProcessRunning("firefox.exe").then((bool)=>{
   console.error(err);
 });
 
+tasklist.isProcessRunning("Builder's Journey.exe").then((bool)=>{
+
+  console.log("- Builder's Journey.exe is runing ?");
+  console.log(bool);
+  console.log("\n");
+
+}).catch((err)=>{
+  console.error(err);
+});
+
 tasklist.hasProcess("system idle process").then((bool)=>{
 
   console.log("- is system idle process loaded ?");
