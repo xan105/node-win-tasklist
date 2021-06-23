@@ -34,7 +34,7 @@ tasklist.getProcessInfo("explorer.exe",{verbose: true}).then((process)=>{
 
 tasklist.isProcessRunning("firefox.exe").then((bool)=>{
 
-  console.log("- is firefox.exe running ?");
+  console.log("- firefox.exe is runing ?");
   console.log(bool);
   console.log("\n");
 
@@ -52,7 +52,7 @@ tasklist.hasProcess("system idle process").then((bool)=>{
   console.error(err);
 });
 
-tasklist({uwpOnly: true}).then((list)=>{
+tasklist({uwpOnly: true, verbose: false}).then((list)=>{
 
   console.log("- List All WinStore App");
   console.log(list);
