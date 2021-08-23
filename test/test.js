@@ -1,8 +1,6 @@
-"use strict";
+import * as tasklist from"../lib/esm.js";
 
-const tasklist = require('../lib/tasklist.cjs');
-
-tasklist().then((list)=>{
+tasklist.default().then((list)=>{
 
   console.log("- List All");
   console.log(list);
@@ -12,7 +10,7 @@ tasklist().then((list)=>{
   console.error(err);
 });
 
-tasklist({verbose: true}).then((list)=>{
+tasklist.default({verbose: true}).then((list)=>{
 
   console.log("- List All (Verbose)");
   console.log(list);
@@ -32,9 +30,39 @@ tasklist.getProcessInfo("explorer.exe",{verbose: true}).then((process)=>{
   console.error(err);
 });
 
+tasklist.getProcessInfo(14716,{verbose: true}).then((process)=>{
+
+  console.log("- Get PID 14716 info (Verbose)");
+  console.log(process);
+  console.log("\n");
+
+}).catch((err)=>{
+  console.error(err);
+});
+
+tasklist.getProcessInfo(14716,{verbose: true, queryExtended: true}).then((process)=>{
+
+  console.log("- Get PID 14716 info (Verbose, Extended)");
+  console.log(process);
+  console.log("\n");
+
+}).catch((err)=>{
+  console.error(err);
+});
+
+tasklist.getProcessInfo("14716",{verbose: true, queryExtended: true}).then((process)=>{
+
+  console.log("- Get PID 14716 info (Verbose, Extended)");
+  console.log(process);
+  console.log("\n");
+
+}).catch((err)=>{
+  console.error(err);
+});
+
 tasklist.isProcessRunning("firefox.exe").then((bool)=>{
 
-  console.log("- firefox.exe is runing ?");
+  console.log("- firefox.exe is running ?");
   console.log(bool);
   console.log("\n");
 
@@ -44,7 +72,7 @@ tasklist.isProcessRunning("firefox.exe").then((bool)=>{
 
 tasklist.isProcessRunning("Builder's Journey.exe").then((bool)=>{
 
-  console.log("- Builder's Journey.exe is runing ?");
+  console.log("- Builder's Journey.exe is running ?");
   console.log(bool);
   console.log("\n");
 
@@ -62,7 +90,7 @@ tasklist.hasProcess("system idle process").then((bool)=>{
   console.error(err);
 });
 
-tasklist({uwpOnly: true, verbose: false}).then((list)=>{
+tasklist.default({uwpOnly: true, verbose: false}).then((list)=>{
 
   console.log("- List All WinStore App");
   console.log(list);
