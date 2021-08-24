@@ -125,9 +125,7 @@ Returns an [Array] of object.
      
      eg filter for listing only running processes :
      `["STATUS eq RUNNING"]`
-     
-     From the tasklist doc :
-    
+  
      <table>
         <thead>
         <tr>
@@ -203,11 +201,13 @@ Returns an [Array] of object.
 
 #### `<Promise> getProcessInfo(string|number process, <obj> option = {}) : <obj>[] | <obj>`
 
+  Get a specific process information.
+  
   `process` can either be a PID (number or number as a string) or an imagename (string).<br />
   Same option as default export minus `filter` and with the addition of `queryExtended`.
   
   `queryExtended` adds `cmdLine` and `origin` (dir) properties from WMIC.<br />
-  See [getAdditionalInfoFromWMIC()]() for more details.
+  See [getAdditionalInfoFromWMIC()](#promise-getadditionalinfofromwmicnumber-pid--obj) for more details.
 
   Returns an [Array] of object or a single obj if you are searching by PID (number or number as a string).<br />
 
