@@ -1,28 +1,25 @@
+About
+=====
+
 Dependency-free promise based wrapper for the Windows tasklist command.
 
-Note about locale:
-------------------
+#### Note about locale:
 
 Most Windows commands change their output based on system's locale, which can be sometimes difficult when you are trying to parse the output of a non-English system.
 This module tries to be system-locale-independent as much as possible in order to be able to parse the tasklist output.
-Unfortunately user and windowTitle returned properties will remain locale-dependent (Not sure about sessionType ?).
+Unfortunately some returned properties will remain locale-dependent.
 
-Install & Usage example
------------------------
+Example
+=======
 
-```$ npm install win-tasklist```
-
-Get a specific process information :
+Get a specific process information:
 
 ```js
-const tasklist = require('win-tasklist');
+import { getProcessInfo } from "win-tasklist";
 
-tasklist.getProcessInfo("explorer.exe",{verbose: true}).then((process)=>{
-
-  console.log(process);
-  
-  /* OUTPUT
-  [ { process: 'explorer.exe',
+console.log( await getProcessInfo("explorer.exe",{verbose: true}) );
+/*
+  [{ process: 'explorer.exe',
       pid: 6960,
       sessionType: 'console',
       sessionNumber: 1,
@@ -30,25 +27,43 @@ tasklist.getProcessInfo("explorer.exe",{verbose: true}).then((process)=>{
       state: 'running',
       user: 'skynet\\xan',
       cpuTime: '0:02:15',
-      windowTitle: 'n/a' } ]  
-  */
+      windowTitle: 'n/a' }]  
+*/
 
+//By PID and fetch additional info via WMIC (cmdLine,origin)
 
-}).catch((err)=>{
-  console.error(err);
-});
+console.log( await getProcessInfo(15640,{verbose: true, queryExtended: true}) );
+/*
+  { process: 'firefox.exe',
+    pid: 15640,
+    sessionType: 'console',
+    sessionNumber: 1,
+    memUsage: 80269312,
+    state: 'running',
+    user: 'SKYNET\\Xan',
+    cpuTime: '0:00:00',
+    windowTitle: 'OleMainThreadWndName',
+    cmdLine: '-contentproc -isForBrowser -prefsHandle 2688 ...',
+    origin: 'C:\\Program Files\\Mozilla Firefox'}  
+*/
 ```
 
-List them all :
+Is process running ? 
 
 ```js
-const tasklist = require('win-tasklist');
+import { isProcessRunning } from "win-tasklist";
 
-tasklist().then((list)=>{
+console.log( await isProcessRunning("firefox.exe") );
+//true or false
+```
 
-  console.log(list);
-  
-  /* OUTPUT
+List them all:
+
+```js
+import tasklist from "win-tasklist";
+
+console.log( await tasklist() );
+/*
   [ { process: 'system idle process',
       pid: 0,
       sessionType: 'services',
@@ -60,31 +75,35 @@ tasklist().then((list)=>{
       sessionNumber: 0,
       memUsage: 2580480 }, 
       ... 100 more items ]
-  */
-
-
-}).catch((err)=>{
-  console.error(err);
-});
+*/
 ```
 
+Installation
+============
+
+`npm install win-tasklist`
+
 API
----
+===
 
-It's always good to have a look at the official [tasklist](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist) doc.
+⚠️ This module is only available as an ECMAScript module (ESM) starting with version 2.0.0.<br />
+Previous version(s) are CommonJS (CJS) with an ESM wrapper.
 
-**tasklist**([option])
+## Default export
 
-Promise.<br />
-Returns an [Array] of object or null<br />
+#### `<Promise> (<obj> option = {}) : <obj>[]`
 
-**options**
-    
+Wrapper to the `tasklist` command.<br />
+Returns an [Array] of object.
+
+<details>
+<summary>⚙️ Options</summary>
+
 - verbose (default: false)<br />
-      if false will return the following properties : process, pid, sessionType, sessionNumber, memUsage (bytes).<br />
-      if true will additionally return the following properties : state, user, cpuTime, windowTitle.<br />
+      if false will return the following properties : `process, pid, sessionType, sessionNumber, memUsage (bytes)`.<br />
+      if true will additionally return the following properties : `state, user, cpuTime, windowTitle`.<br />
       <br />
-      Keep in mind using the verbose option might impact performance.
+      ⚠️ Keep in mind using the verbose option might impact performance.
     
 - remote (default: null)<br />
       Name or IP address of a remote computer.<br />
@@ -98,16 +117,14 @@ Returns an [Array] of object or null<br />
  
 - uwpOnly (default: false)<br />
       List only Windows Store Apps (UWP).<br />
-      NB: With this option to true and verbose to false; tasklist only returns process, pid, memUsage (bytes) and AUMID.
+      ⚠️ NB: With this option to true and verbose to false; tasklist only returns `process, pid, memUsage (bytes) and AUMID`.
       
 - filter (default: [])<br />
     
      Array of string. Each string being a filter.<br />
      
      eg filter for listing only running processes :
-     ```
-     ["STATUS eq RUNNING"]
-     ```
+     `["STATUS eq RUNNING"]`
      
      From the tasklist doc :
     
@@ -177,39 +194,51 @@ Returns an [Array] of object or null<br />
         </tr>
         </tbody>
     </table>
+ 
+💡 More details in the official [tasklist](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/tasklist) doc.
+    
+</details>
 
-Helper function:
-================
+## Named export
 
-- **getProcessInfo**(process,[option])
+#### `<Promise> getProcessInfo(string|number process, <obj> option = {}) : <obj>[] | <obj>`
 
-  Promise.<br />
-
-  `process` can either be a PID or an imagename.<br />
-  Same option as main function minus filter.<br />
-
-  Returns an [Array] of object or null<br />
-
-- **isProcessRunning**(process,[option])
-
-  Promise.<br />
+  `process` can either be a PID (number or number as a string) or an imagename (string).<br />
+  Same option as default export minus `filter` and with the addition of `queryExtended`.
   
-  `process` can either be a PID or an imagename.<br />
-  Same options as main function minus filter and verbose.<br />
+  `queryExtended` adds `cmdLine` and `origin` (dir) properties from WMIC.<br />
+  See [getAdditionalInfoFromWMIC()]() for more details.
+
+  Returns an [Array] of object or a single obj if you are searching by PID (number or number as a string).<br />
+
+#### `<Promise> isProcessRunning(string|number process, <obj> option = {}) : bool`
+
+  `process` can either be a PID (number or number as a string) or an imagename (string).<br />
+  Same option as default export minus `filter` and `verbose`.
   
-  Return true if the specified process is running (*meaning it has the status RUNNING*),<br />
-  false otherwise.<br />
+  Return true if the specified process is running (*meaning it has the status RUNNING*), false otherwise.<br />
    
-  Equivalent of filter *IMAGENAME/PID eq %process% and STATUS eq RUNNING*.<br />
-   
-- **hasProcess**(process,[option])
+  Equivalent of filter `IMAGENAME/PID eq %process% and STATUS eq RUNNING`.<br />
 
-  Promise.<br />
+#### `<Promise> hasProcess(string|number process, <obj> option = {}) : bool`
+
+  `process` can either be a PID (number or number as a string) or an imagename (string).<br />
+  Same option as default export minus `filter` and `verbose`.
   
-  `process` can either be a PID or an imagename.<br />
-  Same options as main function minus filter and verbose.<br />
+  Return true if the specified process is loaded (*meaning it is listed in the tasklist*), false otherwise.<br />
   
-  Return true if the specified process is loaded (*meaning it is listed in the tasklist*),<br />
-  false otherwise.<br />
+  Equivalent of filter `IMAGENAME/PID eq %process%`.<br />
+
+#### `<Promise> getAdditionalInfoFromWMIC(number pid) : <obj>`
+
+  Query WMIC for process' commandline and location (dirpath).<br />
+  Return an object:
   
-  Equivalent of filter *IMAGENAME/PID eq %process%*.<br />
+```js
+  {
+    cmdLine: string, //command line
+    origin: string | null //location (dirpath)
+  }
+```
+
+  In case information can not be accessed due to privileges restriction then `origin` will be `null` and `cmdLine` will be empty.
