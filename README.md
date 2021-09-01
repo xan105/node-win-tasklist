@@ -30,9 +30,9 @@ console.log( await getProcessInfo("explorer.exe",{verbose: true}) );
       windowTitle: 'n/a' }]  
 */
 
-//By PID and fetch additional info via WMIC (cmdLine,origin)
+//By PID and fetch additional info via WMIC (args and dir of origin)
 
-console.log( await getProcessInfo(15640,{verbose: true, queryExtended: true}) );
+console.log( await getProcessInfo(15640,{verbose: true, extended: true}) );
 /*
   { process: 'firefox.exe',
     pid: 15640,
@@ -43,7 +43,7 @@ console.log( await getProcessInfo(15640,{verbose: true, queryExtended: true}) );
     user: 'SKYNET\\Xan',
     cpuTime: '0:00:00',
     windowTitle: 'OleMainThreadWndName',
-    cmdLine: '-contentproc -isForBrowser -prefsHandle 2688 ...',
+    args: '-contentproc -isForBrowser -prefsHandle 2688 ...',
     origin: 'C:\\Program Files\\Mozilla Firefox'}  
 */
 ```
@@ -125,7 +125,7 @@ Returns an [Array] of object.
      
      eg filter for listing only running processes :
      `["STATUS eq RUNNING"]`
-  
+
      <table>
         <thead>
         <tr>
@@ -201,12 +201,10 @@ Returns an [Array] of object.
 
 #### `<Promise> getProcessInfo(string|number process, <obj> option = {}) : <obj>[] | <obj>`
 
-  Get a specific process information.
-  
   `process` can either be a PID (number or number as a string) or an imagename (string).<br />
-  Same option as default export minus `filter` and with the addition of `queryExtended`.
+  Same option as default export minus `filter` and with the addition of `extended` (_boolean_).
   
-  `queryExtended` adds `cmdLine` and `origin` (dir) properties from WMIC.<br />
+  `extended` adds `args` and `origin` (dir) properties from WMIC.<br />
   See [getAdditionalInfoFromWMIC()](#promise-getadditionalinfofromwmicnumber-pid--obj) for more details.
 
   Returns an [Array] of object or a single obj if you are searching by PID (number or number as a string).<br />
@@ -236,9 +234,9 @@ Returns an [Array] of object.
   
 ```js
   {
-    cmdLine: string, //command line
+    args: string, //command line
     origin: string | null //location (dirpath)
   }
 ```
 
-  In case information can not be accessed due to privileges restriction then `origin` will be `null` and `cmdLine` will be empty.
+  In case information can not be accessed due to privileges restriction then `origin` will be `null` and `args` will be empty.

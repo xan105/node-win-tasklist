@@ -30,6 +30,27 @@ tasklist.getProcessInfo("explorer.exe",{verbose: true}).then((process)=>{
   console.error(err);
 });
 
+tasklist.getProcessInfo("explorer.exe",{verbose: true, extended: true}).then((process)=>{
+
+  console.log("- Get explorer.exe info (Verbose, Extended)");
+  console.log(process);
+  console.log("\n");
+
+}).catch((err)=>{
+  console.error(err);
+});
+
+tasklist.getProcessInfo("firefox.exe",{verbose: true, extended: true}).then((process)=>{
+
+  console.log("- Get firefox.exe info (Verbose, Extended)");
+  console.log(process);
+  console.log("\n");
+
+}).catch((err)=>{
+  console.error(err);
+});
+
+
 tasklist.getProcessInfo(14716,{verbose: true}).then((process)=>{
 
   console.log("- Get PID 14716 info (Verbose)");
@@ -40,7 +61,7 @@ tasklist.getProcessInfo(14716,{verbose: true}).then((process)=>{
   console.error(err);
 });
 
-tasklist.getProcessInfo(14716,{verbose: true, queryExtended: true}).then((process)=>{
+tasklist.getProcessInfo(14716,{verbose: true, extended: true}).then((process)=>{
 
   console.log("- Get PID 14716 info (Verbose, Extended)");
   console.log(process);
@@ -50,7 +71,7 @@ tasklist.getProcessInfo(14716,{verbose: true, queryExtended: true}).then((proces
   console.error(err);
 });
 
-tasklist.getProcessInfo("14716",{verbose: true, queryExtended: true}).then((process)=>{
+tasklist.getProcessInfo("14716",{verbose: true, extended: true}).then((process)=>{
 
   console.log("- Get PID 14716 info (Verbose, Extended)");
   console.log(process);
