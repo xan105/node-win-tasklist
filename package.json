@@ -1,6 +1,6 @@
 {
   "name": "win-tasklist",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Dependency-free promise based wrapper for the Windows tasklist command. Non-English locale friendly as much as possible.",
   "type": "module",
   "exports": "./lib/esm.js",
