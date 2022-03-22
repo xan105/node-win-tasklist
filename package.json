@@ -1,15 +1,15 @@
 {
   "name": "win-tasklist",
-  "version": "2.0.1",
-  "description": "Dependency-free promise based wrapper for the Windows tasklist command. Non-English locale friendly as much as possible.",
+  "version": "2.1.0",
+  "description": "Wrapper for the Windows tasklist command. Non-English locale friendly as much as possible.",
   "type": "module",
-  "exports": "./lib/esm.js",
-  "types": "./types/esm.d.ts",
+  "exports": "./lib/index.js",
+  "types": "./types/index.d.ts",
   "os": [
     "win32"
   ],
   "engines": {
-    "node": ">=0.14"
+    "node": ">=16.0.0"
   },
   "scripts": {
     "lint": "npx eslint --ignore-path .gitignore ./**/*.{js,mjs}"
@@ -36,6 +36,10 @@
   },
   "homepage": "https://github.com/xan105/node-win-tasklist#readme",
   "devDependencies": {
-    "eslint": "^7.29.0"
+    "eslint": "^8.11.0"
+  },
+  "dependencies": {
+    "@xan105/error": "^1.2.0",
+    "@xan105/is": "^2.4.0"
   }
 }
