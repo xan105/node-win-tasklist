@@ -1,11 +1,11 @@
 declare interface IOption {
-  verbose?: bool,
+  verbose?: boolean,
   remote?: string | null,
   user?: string | null,
   password?: string | null,
   filter?:  string[],
-  uwpOnly?: bool,
-  extended?: bool
+  uwpOnly?: boolean,
+  extended?: boolean
 }
 
 declare interface ITasklist{
@@ -25,8 +25,8 @@ declare interface ITasklist{
 
 export default function(option?: IOption): Promise<ITasklist[]>
 export function getProcessInfo(process: string | number, option?: IOption): Promise<any>
-export function isProcessRunning(process: string | number, option?: IOption): Promise<bool>
-export function hasProcess(process: string | number, option?: IOption): Promise<bool>
+export function isProcessRunning(process: string | number, option?: IOption): Promise<boolean>
+export function hasProcess(process: string | number, option?: IOption): Promise<boolean>
 
 declare interface IWmic{
   args: string,

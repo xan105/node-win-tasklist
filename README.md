@@ -1,7 +1,7 @@
 About
 =====
 
-Dependency-free promise based wrapper for the Windows tasklist command.
+Wrapper for the Windows tasklist command.
 
 #### Note about locale:
 
@@ -81,7 +81,9 @@ console.log( await tasklist() );
 Installation
 ============
 
-`npm install win-tasklist`
+```
+npm install win-tasklist
+```
 
 API
 ===
@@ -91,7 +93,7 @@ Previous version(s) are CommonJS (CJS) with an ESM wrapper.
 
 ## Default export
 
-#### `<Promise> (<obj> option = {}) : <obj>[]`
+#### `(option?: obj): Promise<obj[]>`
 
 Wrapper to the `tasklist` command.<br />
 Returns an [Array] of object.
@@ -199,7 +201,7 @@ Returns an [Array] of object.
 
 ## Named export
 
-#### `<Promise> getProcessInfo(string|number process, <obj> option = {}) : <obj>[] | <obj>`
+#### `getProcessInfo(process: string | number, option?: obj): Promise<obj[] | obj>`
 
   `process` can either be a PID (number or number as a string) or an imagename (string).<br />
   Same option as default export minus `filter` and with the addition of `extended` (_boolean_).
@@ -209,7 +211,7 @@ Returns an [Array] of object.
 
   Returns an [Array] of object or a single obj if you are searching by PID (number or number as a string).<br />
 
-#### `<Promise> isProcessRunning(string|number process, <obj> option = {}) : bool`
+#### `isProcessRunning(process: string | number, option?: obj): Promise<boolean>`
 
   `process` can either be a PID (number or number as a string) or an imagename (string).<br />
   Same option as default export minus `filter` and `verbose`.
@@ -218,7 +220,7 @@ Returns an [Array] of object.
    
   Equivalent of filter `IMAGENAME/PID eq %process% and STATUS eq RUNNING`.<br />
 
-#### `<Promise> hasProcess(string|number process, <obj> option = {}) : bool`
+#### `hasProcess(process: string | number, option?: obj): Promise<boolean>`
 
   `process` can either be a PID (number or number as a string) or an imagename (string).<br />
   Same option as default export minus `filter` and `verbose`.
@@ -227,7 +229,7 @@ Returns an [Array] of object.
   
   Equivalent of filter `IMAGENAME/PID eq %process%`.<br />
 
-#### `<Promise> getAdditionalInfoFromWMIC(number pid) : <obj>`
+#### `getAdditionalInfoFromWMIC(pid: number): Promise<obj>`
 
   Query WMIC for process' commandline and location (dirpath).<br />
   Return an object:

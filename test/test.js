@@ -1,4 +1,4 @@
-import * as tasklist from"../lib/esm.js";
+import * as tasklist from"../lib/index.js";
 
 tasklist.default().then((list)=>{
 
