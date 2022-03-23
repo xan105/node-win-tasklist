@@ -16,9 +16,9 @@ declare interface ITasklist{
   memUsage: number,
   aumid?: string,
   state?: string,
-  user?: string,
+  user?: string | null,
   cpuTime?: string,
-  windowTitle?: string,
+  windowTitle?: string | null,
   args?: string,
   origin?: string | null
 }
@@ -28,9 +28,9 @@ export function getProcessInfo(process: string | number, option?: IOption): Prom
 export function isProcessRunning(process: string | number, option?: IOption): Promise<boolean>
 export function hasProcess(process: string | number, option?: IOption): Promise<boolean>
 
-declare interface IWmic{
+declare interface IWmi{
   args: string,
   origin: string | null
 }
 
-export function getAdditionalInfoFromWMI(pid: number): Promise<IWmic>
+export function getAdditionalInfoFromWMI(pid: number): Promise<IWmi>
