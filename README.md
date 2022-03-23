@@ -30,7 +30,7 @@ console.log( await getProcessInfo("explorer.exe",{verbose: true}) );
       windowTitle: 'n/a' }]  
 */
 
-//By PID and fetch additional info via WMIC (args and dir of origin)
+//By PID and fetch additional info via WMI (args and dir of origin)
 
 console.log( await getProcessInfo(15640,{verbose: true, extended: true}) );
 /*
@@ -206,8 +206,8 @@ Returns an [Array] of object.
   `process` can either be a PID (number or number as a string) or an imagename (string).<br />
   Same option as default export minus `filter` and with the addition of `extended` (_boolean_).
   
-  `extended` adds `args` and `origin` (dir) properties from WMIC.<br />
-  See [getAdditionalInfoFromWMIC()](#promise-getadditionalinfofromwmicnumber-pid--obj) for more details.
+  `extended` adds `args` and `origin` (dir) properties from WMI.<br />
+  See `getAdditionalInfoFromWMI()` for more details.
 
   Returns an [Array] of object or a single obj if you are searching by PID (number or number as a string).<br />
 
@@ -229,9 +229,9 @@ Returns an [Array] of object.
   
   Equivalent of filter `IMAGENAME/PID eq %process%`.<br />
 
-#### `getAdditionalInfoFromWMIC(pid: number): Promise<obj>`
+#### `getAdditionalInfoFromWMI(pid: number): Promise<obj>`
 
-  Query WMIC for process' commandline and location (dirpath).<br />
+  Query WMI for process' commandline and location (dirpath).<br />
   Return an object:
   
 ```js

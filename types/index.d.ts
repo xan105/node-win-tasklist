@@ -33,4 +33,4 @@ declare interface IWmic{
   origin: string | null
 }
 
-export function getAdditionalInfoFromWMIC(pid: number): Promise<IWmic>
+export function getAdditionalInfoFromWMI(pid: number): Promise<IWmic>
