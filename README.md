@@ -27,7 +27,7 @@ console.log( await getProcessInfo("explorer.exe",{verbose: true}) );
       state: 'running',
       user: 'skynet\\xan',
       cpuTime: '0:02:15',
-      windowTitle: 'n/a' }]  
+      windowTitle: null }]  
 */
 
 //By PID and fetch additional info via WMI (args and dir of origin)
