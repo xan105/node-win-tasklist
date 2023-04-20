@@ -35,6 +35,20 @@
     "url": "https://github.com/xan105/node-win-tasklist/issues"
   },
   "homepage": "https://github.com/xan105/node-win-tasklist#readme",
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/xan105"
+    },
+    {
+      "type": "paypal",
+      "url": "https://www.paypal.me/xan105"
+    },
+    {
+      "type": "patreon",
+      "url": "https://www.patreon.com/xan105"
+    }
+  ],
   "devDependencies": {
     "eslint": "^8.11.0"
   },
